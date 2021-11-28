@@ -1,0 +1,2 @@
+# VoiceVoxTalk
+ユニコエのVOICEVOX用サンプルプラグイン
