@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "VoiceVoxTalk": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\kikuchi\\source\\repos\\VoiceVoxTalk\\VoiceVoxTalk\\bin\\win10-x64\\Yomiage.GUI.exe",
+      "workingDirectory": "C:\\Users\\kikuchi\\source\\repos\\VoiceVoxTalk\\VoiceVoxTalk\\bin\\win10-x64"
+    }
+  }
+}

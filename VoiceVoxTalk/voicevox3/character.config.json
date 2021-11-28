@@ -1,0 +1,12 @@
+﻿{
+  "Type": "BasicFormat",
+  "BasicFormat": {
+    "Base": "picture/Base.png",
+    "MouthOpen": "picture/MouthOpen.png",
+    "EyeClose": "picture/EyeClose.png",
+    "Sleep1": "picture/Sleep1.png",
+    "Sleep2": "picture/Sleep2.png"
+  },
+  "DarkBackGroundColor": "#123456",
+  "LightBackGroundColor": "#12345678"
+}

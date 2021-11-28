@@ -1,0 +1,12 @@
+{
+  "Key": "VoiceVoxTalkEngine",
+  "Name": "VoiceVoxTalkエンジン",
+  "Description": "VoiceVoxApi を呼び出す",
+  "OS": "Windows",
+  "AssemblyName": "VoiceVoxTalk.dll",
+  "Language": "Japanese",
+  "AccentEnable": false,
+  "AccentHide": true,
+  "SubPresetEnable": false,
+  "EngineSaveEnable": false
+}
