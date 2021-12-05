@@ -1,2 +1,44 @@
-{
+﻿{
+  "Doubles": [
+    {
+      "Value": 0.5,
+      "DefaultValue": 0.5,
+      "Min": 0,
+      "Max": 1,
+      "SmallStep": 0.01,
+      "StringFormat": "0.00",
+      "Key": "MorphRatio",
+      "Name": "モーフィングの割合",
+      "Description": "0:ベース寄り、1:サブ寄り",
+      "Order": 0,
+      "Hide": false
+    }
+  ],
+  "Strings": [
+    {
+      "Value": "50021",
+      "DefaultValue": "50021",
+      "ComboItems": [
+        "50021",
+        "50031"
+      ],
+      "Key": "Port",
+      "Name": "ポート番号",
+      "Description": "50021:VoiceVox  50031:CoeIroInk",
+      "Order": 0,
+      "Type": "combobox",
+      "Hide": false
+    },
+    {
+      "Value": "",
+      "DefaultValue": "",
+      "Key": "ExePath",
+      "Name": "Exe パス",
+      "Description": "Run.exe のパスを選択すると自動で起動してくれる。",
+      "Order": 0,
+      "Type": "file",
+      "Hide": false,
+      "FileDialogFilter": "exeファイル|*exe"
+    }
+  ]
 }

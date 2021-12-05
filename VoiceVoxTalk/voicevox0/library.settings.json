@@ -1,32 +1,15 @@
 ﻿{
   "Ints": [
     {
+      "Key": "Speaker",
+      "Name": "Speaker Id",
+      "Description": "呼び出すキャラクターが変わる",
       "Value": 0,
       "DefaultValue": 0,
       "Min": 0,
       "Max": 100,
       "SmallStep": 1,
-      "Key": "Speaker",
-      "Name": "Speaker Id",
-      "Description": "呼び出すキャラクターが変わる",
       "Order": 0,
-      "Type": "",
-      "Hide": false
-    }
-  ],
-  "Strings": [
-    {
-      "Value": "50021",
-      "DefaultValue": "50021",
-      "ComboItems": [
-        "50021",
-        "50031"
-      ],
-      "Key": "Port",
-      "Name": "ポート番号",
-      "Description": "50021:VoiceVox  50031:CoeIroInk",
-      "Order": 0,
-      "Type": "combobox",
       "Hide": false
     }
   ]
