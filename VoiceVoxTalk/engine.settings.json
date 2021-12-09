@@ -27,7 +27,7 @@
       "Description": "50021:VoiceVox  50031:CoeIroInk",
       "Order": 0,
       "Type": "combobox",
-      "Hide": false
+      "Hide": true
     },
     {
       "Value": "",

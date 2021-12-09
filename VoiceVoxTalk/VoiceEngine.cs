@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Yomiage.SDK;
 using Yomiage.SDK.Common;
+using Yomiage.SDK.Config;
 using Yomiage.SDK.Talk;
 using Yomiage.SDK.VoiceEffects;
 
@@ -24,10 +25,63 @@ namespace VoiceVoxTalk
             client = new HttpClient();
         }
 
+        public override void Initialize(string configDirectory, string dllDirectory, EngineConfig config)
+        {
+            base.Initialize(configDirectory, dllDirectory, config);
+
+            Task.Run(async() =>
+            {
+                try
+                {
+                    var portNum = Settings.GetPortNum();
+                    var baseUrl = $"http://127.0.0.1:{portNum}";
+                    var result = await client?.GetAsync($"{baseUrl}/version");
+                }
+                catch (Exception)
+                {
+                    Boot();
+                }
+            });
+        }
+
+        private void Boot()
+        {
+            try
+            {
+                var exePath = Settings.GetExePath();
+                if (!string.IsNullOrWhiteSpace(exePath) && File.Exists(exePath))
+                {
+                    if (processManager.ExePath != exePath)
+                    {
+                        processManager.ExePath = exePath;
+                        if (processManager.Process != null)
+                        {
+                            processManager.Process.Kill();
+                            processManager.Process = null;
+                        }
+
+                        var processStartInfo = new ProcessStartInfo()
+                        {
+                            FileName = exePath,
+                            CreateNoWindow = true,
+                            UseShellExecute = false,
+                        };
+                        processManager.Process = Process.Start(processStartInfo);
+                        processManager.Process.WaitForInputIdle();
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
         public override void Dispose()
         {
             base.Dispose();
             client.Dispose();
+            processManager.Process?.Kill();
         }
 
         public override async Task<double[]> Play(VoiceConfig mainVoice, VoiceConfig subVoice, TalkScript talkScript, MasterEffectValue masterEffect, Action<int> setSamplingRate_Hz, Action<double[]> submitWavePart)
@@ -38,9 +92,6 @@ namespace VoiceVoxTalk
             int speaker = mainVoice.Library.Settings.GetSpeaker();
             var portNum = Settings.GetPortNum();
 
-            var exePath = Settings.GetExePath();
-
-
             (var fs, var wave) = await CallVoiceVoxApi(
                 talkScript,
                 portNum,
@@ -50,7 +101,6 @@ namespace VoiceVoxTalk
                 mainVoice.VoiceEffect.Pitch.Value,
                 mainVoice.VoiceEffect.Emphasis.Value,
                 masterEffect.EndPause,
-                exePath,
                 subVoice?.Library?.Settings?.GetSpeaker(),
                 Settings.GetMorphRatio());
 
@@ -69,11 +119,12 @@ namespace VoiceVoxTalk
             double pitch = 0,
             double emphasis = 1,
             double endPauseMs = 100,
-            string exePath = "",
             int? subSpeaker = null,
             double morphRatio = 0.5)
         {
             var text = talkScript?.GetYomiForAquesTalkLike();
+            text = text.Replace("_ン", "ン");
+
             if (string.IsNullOrWhiteSpace(text))
             {
                 return (44100, new double[0]);
@@ -166,20 +217,6 @@ namespace VoiceVoxTalk
             }
             catch (Exception)
             {
-                if (!string.IsNullOrWhiteSpace(exePath) && File.Exists(exePath))
-                {
-                    if (processManager.ExePath != exePath)
-                    {
-                        processManager.ExePath = exePath;
-                        if (processManager.Process != null)
-                        {
-                            processManager.Process.Kill();
-                            processManager.Process = null;
-                        }
-                        processManager.Process = Process.Start(exePath);
-                        processManager.Process.WaitForInputIdle();
-                    }
-                }
             }
 
             return (44100, new double[0]);
