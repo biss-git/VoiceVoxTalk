@@ -15,7 +15,7 @@ namespace VoiceVoxTalk
         public double postPhonemeLength { get; set; } = 0.1;
         public int outputSamplingRate { get; set; } = 24000;
         public bool outputStereo { get; set; } = false;
-        public string kana { get; set; }
+        public string kana { get; set; } = "カナ";
     }
 
     internal class AccentPhrase

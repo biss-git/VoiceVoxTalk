@@ -6,6 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
 using System.Threading.Tasks;
 using Yomiage.SDK;
 using Yomiage.SDK.Common;
@@ -100,7 +103,7 @@ namespace VoiceVoxTalk
                 mainVoice.VoiceEffect.Speed.Value,
                 mainVoice.VoiceEffect.Pitch.Value,
                 mainVoice.VoiceEffect.Emphasis.Value,
-                masterEffect.EndPause,
+                masterEffect.EndPause + talkScript.EndSection.Pause.Span_ms,
                 subVoice?.Library?.Settings?.GetSpeaker(),
                 Settings.GetMorphRatio());
 
@@ -137,6 +140,7 @@ namespace VoiceVoxTalk
 
 
                 var queryJson = await query.Content.ReadAsStringAsync();
+                File.WriteAllText(Path.Combine(DllDirectory, "OriginalQuery.json"), LintJson(queryJson));
                 var accentPhrases = JsonUtil.DeserializeFromString<List<AccentPhrase>>(queryJson);
                 if (accentPhrases == null)
                 {
@@ -167,7 +171,8 @@ namespace VoiceVoxTalk
                         // ポーズの設定
                         if (i > 0 && section1.Pause.Span_ms > 0)
                         {
-                            accentPhrases[i -1].pause_mora = new VoiceVoxMora(section1.Pause.Span_ms / 1000.0);
+                            // EndSectionのポーズはここには含まれない。EndSection のポーズは endPauseMs に含まれる。
+                            accentPhrases[i - 1].pause_mora = new VoiceVoxMora(section1.Pause.Span_ms / 1000.0);
                         }
                     }
 
@@ -184,7 +189,7 @@ namespace VoiceVoxTalk
                 };
 
                 queryJson = JsonUtil.SerializeToString(voiceVoxQuery);
-
+                File.WriteAllText(Path.Combine(DllDirectory, "ModifiedQuery.json"), LintJson(queryJson));
                 var content = new StringContent(queryJson, Encoding.UTF8, "application/json");
 
                 byte[] bytes;
@@ -222,5 +227,30 @@ namespace VoiceVoxTalk
             return (44100, new double[0]);
         }
 
+
+        public static string LintJson(string jsonText)
+        {
+            try
+            {
+                var options1 = new JsonSerializerOptions
+                {
+                    ReadCommentHandling = JsonCommentHandling.Skip,
+                    AllowTrailingCommas = true,
+                };
+                var x = JsonSerializer.Deserialize<object>(jsonText, options1);
+
+                var options2 = new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                };
+                jsonText = JsonSerializer.Serialize(x, options2);
+
+            }
+            catch (Exception)
+            {
+            }
+            return jsonText;
+        }
     }
 }
