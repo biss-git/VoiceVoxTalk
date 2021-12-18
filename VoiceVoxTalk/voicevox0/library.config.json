@@ -4,6 +4,9 @@
   "Description": "VOICEVOX の 0 番話者",
   "OS": "Windows",
   "Language": "Japanese",
+  "LibraryFormat": [
+    "VoiceVoxLibrary"
+  ],
   "VolumeSetting": {
     "Name": "音量",
     "Unit": "[倍]",

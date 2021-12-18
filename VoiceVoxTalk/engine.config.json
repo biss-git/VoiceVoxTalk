@@ -5,6 +5,9 @@
   "OS": "Windows",
   "AssemblyName": "VoiceVoxTalk.dll",
   "Language": "Japanese",
+  "LibraryFormat": [
+    "VoiceVoxLibrary"
+  ],
   "AccentEnable": true,
   "AccentHide": false,
   "SubPresetEnable": true,
