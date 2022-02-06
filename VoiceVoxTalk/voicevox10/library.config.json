@@ -1,0 +1,66 @@
+{
+  "Key": "voicevox10",
+  "Name": "雨晴はう",
+  "Description": "VOICEVOX の 10 番話者",
+  "OS": "Windows",
+  "Language": "Japanese",
+  "LibraryFormat": [
+    "VoiceVoxLibrary"
+  ],
+  "VolumeSetting": {
+    "Name": "音量",
+    "Unit": "[倍]",
+    "Description": "",
+    "Value": 1,
+    "DefaultValue": 1,
+    "Min": 0,
+    "MinExtend": 0,
+    "Max": 2,
+    "MaxExtend": 2,
+    "SmallStep": 0.01,
+    "StringFormat": "0.00",
+    "Hide": false
+  },
+  "SpeedSetting": {
+    "Name": "話速",
+    "Unit": "[倍]",
+    "Description": "",
+    "Value": 1,
+    "DefaultValue": 1,
+    "Min": 0.5,
+    "MinExtend": 0.5,
+    "Max": 2,
+    "MaxExtend": 2,
+    "SmallStep": 0.01,
+    "StringFormat": "0.00",
+    "Hide": false
+  },
+  "PitchSetting": {
+    "Name": "高さ",
+    "Unit": "[倍]",
+    "Description": "",
+    "Value": 0,
+    "DefaultValue": 0,
+    "Min": -0.3,
+    "MinExtend": -0.3,
+    "Max": 0.3,
+    "MaxExtend": 0.3,
+    "SmallStep": 0.01,
+    "StringFormat": "0.00",
+    "Hide": false
+  },
+  "EmphasisSetting": {
+    "Name": "抑揚",
+    "Unit": "[倍]",
+    "Description": "",
+    "Value": 1,
+    "DefaultValue": 1,
+    "Min": 0,
+    "MinExtend": 0,
+    "Max": 2,
+    "MaxExtend": 2,
+    "SmallStep": 0.01,
+    "StringFormat": "0.00",
+    "Hide": false
+  }
+}

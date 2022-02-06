@@ -1,0 +1,16 @@
+﻿{
+  "Ints": [
+    {
+      "Key": "Speaker",
+      "Name": "Speaker Id",
+      "Description": "呼び出すキャラクターが変わる",
+      "Value": 10,
+      "DefaultValue": 10,
+      "Min": 0,
+      "Max": 100,
+      "SmallStep": 1,
+      "Order": 0,
+      "Hide": false
+    }
+  ]
+}
