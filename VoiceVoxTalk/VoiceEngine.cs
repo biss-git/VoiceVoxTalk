@@ -99,10 +99,11 @@ namespace VoiceVoxTalk
                 talkScript,
                 portNum,
                 speaker,
-                mainVoice.VoiceEffect.Volume.Value,
-                mainVoice.VoiceEffect.Speed.Value,
+                mainVoice.VoiceEffect.Volume.Value * masterEffect.Volume.Value,
+                mainVoice.VoiceEffect.Speed.Value * masterEffect.Speed.Value,
                 mainVoice.VoiceEffect.Pitch.Value,
-                mainVoice.VoiceEffect.Emphasis.Value,
+                mainVoice.Library.Settings.GetBasePitch(),
+                mainVoice.VoiceEffect.Emphasis.Value * masterEffect.Emphasis.Value,
                 masterEffect.EndPause + talkScript.EndSection.Pause.Span_ms,
                 subVoice?.Library?.Settings?.GetSpeaker(),
                 Settings.GetMorphRatio());
@@ -120,6 +121,7 @@ namespace VoiceVoxTalk
             double volume = 1,
             double speed = 1,
             double pitch = 0,
+            double basePitch = 5.7,
             double emphasis = 1,
             double endPauseMs = 100,
             int? subSpeaker = null,
@@ -155,16 +157,19 @@ namespace VoiceVoxTalk
 
                         var sectionPitch = section1.Pitch != null ? section1.Pitch.Value : 0.0;
                         var sectionSpeed = section1.Speed != null ? section1.Speed.Value : 1.0;
+                        var sectionEmphasis = section1.Emphasis != null ? section1.Emphasis.Value : 1.0;
 
                         // イントネーション、子音長さ、母音長さの適用
                         for (int j = 0; j < Math.Min(section1.Moras.Count, section2.moras.Count); j++)
                         {
                             var mora1 = section1.Moras[j];
                             var mora2 = section2.moras[j];
-                            mora2.ShiftPitch(mora1.GetPitch() + sectionPitch);
-                            mora2.ShiftConsonantLength(mora1.GetConsonantLength());
+                            mora2.EmphasisPitch(sectionEmphasis * emphasis, basePitch);
+                            mora2.ShiftPitch(sectionPitch);
+                            mora2.ShiftPitch(mora1.GetPitch());
+                            mora2.ShiftConsonantLength(mora1.GetConsonantLength() / 1000);
                             mora2.GainConsonantLength(1.0 / sectionSpeed);
-                            mora2.ShiftVowelLength(mora1.GetVowelLength());
+                            mora2.ShiftVowelLength(mora1.GetVowelLength() / 1000);
                             mora2.GainVowelLength(1.0 / sectionSpeed);
                         }
 
@@ -206,7 +211,7 @@ namespace VoiceVoxTalk
                     bytes = await result.Content.ReadAsByteArrayAsync();
                 }
 
-                var filePath = Path.Combine(DllDirectory, "temp_.wav");
+                var filePath = Path.Combine(DllDirectory, "temp.wav");
                 File.WriteAllBytes(filePath, bytes);
 
                 using var reader = new WaveFileReader(filePath);

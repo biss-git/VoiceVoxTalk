@@ -61,6 +61,16 @@ namespace VoiceVoxTalk
             return 0.5;
         }
 
+        public static double GetBasePitch(this SettingsBase settings)
+        {
+            var key = "BasePitch";
+            if (settings.Doubles?.TryGetSetting(key, out var value) == true)
+            {
+                return value.Value;
+            }
+            return 5.7;
+        }
+
         public static int GetPortNum(this SettingsBase settings)
         {
             var key = "Port";

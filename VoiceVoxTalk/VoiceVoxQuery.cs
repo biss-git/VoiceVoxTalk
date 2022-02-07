@@ -51,6 +51,19 @@ namespace VoiceVoxTalk
             pitch = Math.Clamp(pitch + value, 0, 20);
         }
 
+        /// <summary>
+        /// 抑揚を適用する
+        /// </summary>
+        /// <param name="emphasis">抑揚（1でそのまま）</param>
+        /// <param name="basePitch">基本ピッチ</param>
+        public void EmphasisPitch(double emphasis, double basePitch)
+        {
+            if (pitch > 0 && basePitch > 0)
+            {
+                pitch = Math.Clamp(basePitch + (pitch - basePitch) * emphasis, 0, 20);
+            }
+        }
+
         public void ShiftConsonantLength(double value)
         {
             if (consonant_length != null)
