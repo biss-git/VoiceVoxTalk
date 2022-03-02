@@ -1,0 +1,31 @@
+﻿{
+  "Ints": [
+    {
+      "Key": "Speaker",
+      "Name": "Speaker Id",
+      "Description": "呼び出すキャラクターが変わる",
+      "Value": 11,
+      "DefaultValue": 11,
+      "Min": 0,
+      "Max": 100,
+      "SmallStep": 1,
+      "Order": 0,
+      "Hide": false
+    }
+  ],
+  "Doubles": [
+    {
+      "Key": "BasePitch",
+      "Name": "基準音高",
+      "Description": "キャラクターの声の基準高さ。抑揚の計算にのみ使用される。",
+      "Value": 4.9,
+      "DefaultValue": 4.9,
+      "Min": 4,
+      "Max": 7,
+      "SmallStep": 0.1,
+      "StringFormat": "0.0",
+      "Order": 0,
+      "Hide": false
+    }
+  ]
+}

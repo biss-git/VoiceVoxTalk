@@ -1,11 +1,11 @@
 {
-  "Key": "coeiroink1",
-  "Name": "MANA",
-  "Description": "COEIROINK の 1 番話者",
+  "Key": "voicevox13",
+  "Name": "青山龍星",
+  "Description": "VOICEVOX の 13 番話者",
   "OS": "Windows",
   "Language": "Japanese",
   "LibraryFormat": [
-    "CoeIroInkLibrary"
+    "VoiceVoxLibrary"
   ],
   "VolumeSetting": {
     "Name": "音量",
@@ -47,7 +47,7 @@
     "MaxExtend": 1.0,
     "SmallStep": 0.01,
     "StringFormat": "0.00",
-    "Hide": true
+    "Hide": false
   },
   "EmphasisSetting": {
     "Name": "抑揚",
@@ -61,6 +61,6 @@
     "MaxExtend": 2,
     "SmallStep": 0.01,
     "StringFormat": "0.00",
-    "Hide": true
+    "Hide": false
   }
 }

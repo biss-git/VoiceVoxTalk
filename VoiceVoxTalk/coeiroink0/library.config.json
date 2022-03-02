@@ -1,11 +1,11 @@
 {
   "Key": "coeiroink0",
-  "Name": "つくよみちゃん",
+  "Name": "つくよみちゃん（れいせい）",
   "Description": "COEIROINK の 0 番話者",
   "OS": "Windows",
   "Language": "Japanese",
   "LibraryFormat": [
-    "VoiceVoxLibrary"
+    "CoeIroInkLibrary"
   ],
   "VolumeSetting": {
     "Name": "音量",
@@ -33,7 +33,7 @@
     "MaxExtend": 2,
     "SmallStep": 0.01,
     "StringFormat": "0.00",
-    "Hide": true
+    "Hide": false
   },
   "PitchSetting": {
     "Name": "高さ",

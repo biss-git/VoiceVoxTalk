@@ -5,7 +5,7 @@
   "OS": "Windows",
   "Language": "Japanese",
   "LibraryFormat": [
-    "VoiceVoxLibrary"
+    "CoeIroInkLibrary"
   ],
   "VolumeSetting": {
     "Name": "音量",
@@ -33,7 +33,7 @@
     "MaxExtend": 2,
     "SmallStep": 0.01,
     "StringFormat": "0.00",
-    "Hide": true
+    "Hide": false
   },
   "PitchSetting": {
     "Name": "高さ",

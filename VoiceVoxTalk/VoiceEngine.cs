@@ -127,6 +127,23 @@ namespace VoiceVoxTalk
             int? subSpeaker = null,
             double morphRatio = 0.5)
         {
+
+            {
+                // ２文字目以降の シ と ス はデフォルトでは無声音にする。
+                foreach(var section in talkScript.Sections)
+                {
+                    for (int i = 1; i < section.Moras.Count; i++)
+                    {
+                        var m = section.Moras[i];
+                        if (m.Voiceless == null &&
+                           (m.Character == "シ" || m.Character == "ス"))
+                        {
+                            m.Voiceless = true;
+                        }
+                    }
+                }
+            }
+
             var text = talkScript?.GetYomiForAquesTalkLike();
             text = text.Replace("_ン", "ン");
 
